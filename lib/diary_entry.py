@@ -6,6 +6,7 @@ class DiaryEntry:
     def __init__(self, title, contents): 
         self.title = title
         self.contents = contents
+        self.index = 0
 
     def count_words(self):
         return len(self.contents.split())
@@ -16,5 +17,9 @@ class DiaryEntry:
 
     def reading_chunk(self, wpm, minutes):
         words_to_read = int(wpm * minutes)
-        chunk = self.contents.split()[0:words_to_read]
-        return " ".join(chunk)
+        end_of_contents = self.index + words_to_read
+        chunk = self.contents.split()[self.index: end_of_contents]
+        self.index += words_to_read
+        if self.index >= self.count_words(): 
+            self.index = 0
+        return " ".join(chunk) 

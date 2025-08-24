@@ -16,4 +16,9 @@ def test_method_calculates_and_returns_reading_time():
 def test_reading_chunk_method_returns_the_target_amount_of_contents():
     diary_entry = DiaryEntry("Great Day!", "I found £10 on the floor!")
     assert diary_entry.reading_chunk(1, 4) == "I found £10 on"
-    
+
+def test_reading_chunk_method_returns_the_next_chunk_of_contents_when_called_multiple_times():
+    diary_entry = DiaryEntry("Great Day!", "I found £10 on the floor!")
+    assert diary_entry.reading_chunk(1, 4) == "I found £10 on"
+    assert diary_entry.reading_chunk(1, 2) == "the floor!"
+    assert diary_entry.reading_chunk(2, 6) == "I found £10 on the floor!"
